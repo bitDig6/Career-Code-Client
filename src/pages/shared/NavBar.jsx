@@ -14,11 +14,10 @@ const NavBar = () => {
         <li><NavLink to='/myPostedJobs'>My Posted Jobs</NavLink></li>
     </>
 
-    const handleLogut = () => {
-
+    const handleLogout = () => {
         logoutUser()
             .then(() => {
-                console.log('logut successful');
+                console.log('logout successful');
             }).catch(error => {
                 console.log(error.message);
             })
@@ -49,7 +48,7 @@ const NavBar = () => {
             <div className="navbar-end">
                 {
                     user ? <>
-                        <button onClick={handleLogut} className='btn'>Logout</button>
+                        <button onClick={handleLogout} className='btn'>Logout</button>
                     </>
                         : <>
                             <Link className='btn' to='/register'>Register</Link>

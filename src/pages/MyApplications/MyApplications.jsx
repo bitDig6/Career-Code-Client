@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const MyApplications = () => {
     const { user } = useAuth();
     const { email } = user;
     const [userApplications, setUserApplications] = useState([]);
+
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
         // fetch(`http://localhost:5000/jobApplications?email=${email}`)
@@ -16,9 +18,10 @@ const MyApplications = () => {
         //     }).catch(error => {
         //         console.log(error);
         //     })
-       axios.get(`http://localhost:5000/jobApplications?email=${email}`, {withCredentials: true})
-        .then(res => setUserApplications(res.data))
-        .catch(error => console.log(error))
+    //    
+        axiosSecure.get(`/jobApplications?email=${email}`)
+            .then(res => setUserApplications(res.data))
+
     }, [email]);
 
     const handleDeleteApplication = (id) => {

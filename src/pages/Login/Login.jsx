@@ -2,15 +2,15 @@ import React, { useContext, useState } from 'react';
 import registerLottie from '../../assets/lottieReg.json';
 import Lottie from 'lottie-react';
 import AuthContext from '../../context/AuthContext/AuthContext';
-import { useLocation, useNavigate } from 'react-router';
-import axios from 'axios';
+// import { useLocation, useNavigate } from 'react-router';
+// import axios from 'axios';
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext);
     const [error, setError] = useState(null);
-    const location = useLocation();
-    const navigate = useNavigate();
-    const from = location.state || '/';
+    // const location = useLocation();
+    // const navigate = useNavigate();
+    // const from = location.state || '/';
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -20,13 +20,9 @@ const Login = () => {
         const password = form.password.value;
         
         loginUser(email, password)
-            .then(res => {
-                const user = {email: res.user.email};
-                axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
-                    .then(res => console.log(res.data))
-                    .catch(error => console.log(error))
-                // navigate(from);
-            }).catch(error => {
+            .then(res => console.log(res.user))
+            .catch(error => {
+                console.log(error);
                 setError(error.message);
             })
     }
